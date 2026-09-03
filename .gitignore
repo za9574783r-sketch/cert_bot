@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+ENV/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Bot runtime — secrets, db, logs, cache
+.env
+.env.local
+.env.production
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+logs/
+*.log
+
+# Coverage / build artifacts
+dist/
+build/
+htmlcov/
+.coverage
+.tox/
+
+# ngrok / tunnel
+ngrok.exe
+*.ngrok*
