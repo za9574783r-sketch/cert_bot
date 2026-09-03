@@ -47,3 +47,4 @@ htmlcov/
 # ngrok / tunnel
 ngrok.exe
 *.ngrok*
+tools/
