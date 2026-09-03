@@ -30,7 +30,11 @@ class MenuButtonMiddleware(BaseMiddleware):
         data: Dict[str, Any],
     ) -> Any:
         user_id = data.get("event_from_user")
-        if user_id is not None and user_id not in self._installed:
+        if (
+            user_id is not None
+            and user_id not in self._installed
+            and WEBAPP_URL.startswith("https://")
+        ):
             bot = data.get("bot")
             if bot is not None:
                 try:

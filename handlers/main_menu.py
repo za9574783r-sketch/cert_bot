@@ -4,6 +4,7 @@ from aiogram.types import Message
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 
+from config import WEBAPP_URL
 from database.crud import get_subjects
 from keyboards import get_main_menu_keyboard
 from keyboards.webapp_menu import get_webapp_keyboard
@@ -24,8 +25,7 @@ async def cmd_start(message: Message, state: FSMContext):
         "🇺🇿 <b>Ona tili</b>\n"
         "📖 <b>Adabiyot</b>\n"
         "🏛️ <b>Tarix</b>\n\n"
-        "Quyidagi menyudan fan tanlang yoki Mini App orqali "
-        "chiroyli interfeysda ishlating:"
+        "Quyidagi menyudan fan tanlang."
     )
 
     # Inline subject keyboard (existing flow)
@@ -34,8 +34,18 @@ async def cmd_start(message: Message, state: FSMContext):
         reply_markup=get_main_menu_keyboard(subjects),
         parse_mode="HTML",
     )
-    # Persistent reply keyboard with Mini App launcher
-    await message.answer(
-        "👆 Quyidagi tugma orqali Mini App ni oching:",
-        reply_markup=get_webapp_keyboard(),
-    )
+
+    # Persistent reply keyboard with Mini App launcher — only if HTTPS is set.
+    # Telegram refuses Web App URLs that are not HTTPS.
+    if WEBAPP_URL.startswith("https://"):
+        await message.answer(
+            "👆 Quyidagi tugma orqali Mini App ni oching:",
+            reply_markup=get_webapp_keyboard(),
+        )
+    else:
+        await message.answer(
+            "💡 Mini App HTTPS URL talab qiladi. Hozircha quyidagi inline "
+            "tugmalar orqali ishlating. Mini App haqida to'liq ma'lumot: "
+            "<code>/webapp</code>",
+            parse_mode="HTML",
+        )
