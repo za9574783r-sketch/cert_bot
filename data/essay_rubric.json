@@ -1,0 +1,185 @@
+{
+  "_comment": "Ona tili va adabiyot fanidan esse baholash mezoni. Manba: DTM 'Yozma ishni baholash mezoni' 2024",
+  "total_score": 24,
+  "minimum_word_count": 100,
+  "disqualification_score": 2,
+  "no_essay_score": 0,
+  "criteria": [
+    {
+      "id": 1,
+      "name": "Uslub (Style)",
+      "category": "Topshiriq talablari",
+      "max_score": 2,
+      "description": "Esse publitsistik (ilmiy-ommabop) uslubda yozilishi kerak",
+      "scoring": {
+        "2": "To'liq publitsistik uslubda yozilgan",
+        "1.5": "Ayrim o'rinlarda publitsistik uslubdan chekinilgan",
+        "1": "Esse qisman publitsistik uslubda yozilgan",
+        "0.5": "Esse to'liq badiiy uslubida yozilgan",
+        "0": "Esse to'liq so'zlashuv uslubida yozilgan"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Vaziyat yuzasidan qarashlar",
+      "category": "Topshiriq talablari",
+      "max_score": 2,
+      "description": "Berilgan vaziyat yuzasidan ikki xil qarash va talabgorning shaxsiy qarashi yoritilishi",
+      "scoring": {
+        "2": "Ikkala qarash va shaxsiy qarash to'la yoritilgan",
+        "1.5": "Ikkala qarash yoritilgan, lekin shaxsiy fikr yo'q",
+        "1": "Qarashlardan bittasi to'la yoritilgan",
+        "0.5": "Qarashlarning faqat bittasi qisman yoritilgan",
+        "0": "Vaziyat yuzasidan qarashlar yoritilmagan"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Dalillar bilan asoslash",
+      "category": "Topshiriq talablari",
+      "max_score": 2,
+      "description": "Har bir qarash dalillar bilan asoslangan bo'lishi kerak",
+      "scoring": {
+        "2": "Har ikkala qarash dalillar bilan asoslangan",
+        "1.5": "Faqat bitta qarash dalillangan",
+        "1": "Ikkala qarash uchun ayrim dalillar vaziyatga mos emas",
+        "0.5": "Ikkala qarash uchun dalillar vaziyatga mos emas",
+        "0": "Ikkala qarash dalillanmagan"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Matn yaxlitligi (kompozitsiya)",
+      "category": "Matn yaxlitligi",
+      "max_score": 2,
+      "description": "Esse uch qismdan iborat: kirish, asosiy qism, xulosa",
+      "scoring": {
+        "2": "Kirish, asosiy qism va xulosa to'la yoritilgan",
+        "1.5": "Qismlardan faqat ikkitasi to'la yoritilgan",
+        "1": "Qismlardan ikkitasi yuza yoritilgan",
+        "0.5": "Qismlardan faqat bittasi to'la yoritilgan",
+        "0": "Qismlardan faqat bittasi yuza yoritilgan"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Mantiqiy qurilish va xatboshilar",
+      "category": "Matn yaxlitligi",
+      "max_score": 2,
+      "description": "Matn qismlari, gap qurilishi to'g'ri; xatboshilar to'g'ri ajratilgan",
+      "scoring": {
+        "2": "Xatolik kuzatilmagan, xatboshilar to'g'ri ajratilgan",
+        "1.5": "Xatboshilarga ajratishda 1-2 o'rinda xatolik",
+        "1": "Qurilishda yoki xatboshilarda 3-4 o'rinda xatolik",
+        "0.5": "Qurilishda yoki xatboshilarda 5-6 o'rinda xatolik",
+        "0": "7+ o'rinda xatolik yoki xatboshilar ajratilmagan"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Mantiqiy-mazmuniy izchillik",
+      "category": "Matn yaxlitligi",
+      "max_score": 2,
+      "description": "Fikrlar mantiqiy izchillikda bayon qilingan, takror yo'q",
+      "scoring": {
+        "2": "To'liq rioya qilingan, takror kuzatilmagan",
+        "1.5": "Fikrlar takrori 1-2 o'rinda, izchillik buzilmagan",
+        "1": "Fikrlar takrori 3-4 o'rinda, izchillik biroz buzilgan",
+        "0.5": "Fikrlar takrori 5-6 o'rinda, izchillik buzilgan",
+        "0": "Fikrlar takrori 7+, izchillik buzilgan"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Imlo",
+      "category": "Savodxonlik",
+      "max_score": 2,
+      "description": "Imlo bilan bog'liq xatoliklar soni",
+      "scoring": {
+        "2": "Imlo xatoligi umuman uchramagan",
+        "1.5": "1-2 o'rinda uchragan",
+        "1": "3-4 o'rinda uchragan",
+        "0.5": "5-6 o'rinda uchragan",
+        "0": "7+ o'rinda uchragan"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Punktuatsiya",
+      "category": "Savodxonlik",
+      "max_score": 2,
+      "description": "Punktuatsion xatoliklar soni",
+      "scoring": {
+        "2": "Punktuatsion xatolik uchramagan",
+        "1.5": "1-2 o'rinda uchragan",
+        "1": "3-4 o'rinda uchragan",
+        "0.5": "5-6 o'rinda uchragan",
+        "0": "7+ o'rinda uchragan"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Qo'shimcha qo'llash",
+      "category": "Til birliklari uslubiyati",
+      "max_score": 2,
+      "description": "Qo'shimcha qo'llash bilan bog'liq uslubiy xatolik",
+      "scoring": {
+        "2": "Xatolik uchramagan",
+        "1.5": "1-2 o'rinda",
+        "1": "3-4 o'rinda",
+        "0.5": "5-6 o'rinda",
+        "0": "7+ o'rinda"
+      }
+    },
+    {
+      "id": 10,
+      "name": "So'z qo'llash",
+      "category": "Til birliklari uslubiyati",
+      "max_score": 2,
+      "description": "So'z qo'llash bilan bog'liq uslubiy xatolik",
+      "scoring": {
+        "2": "Uslubiy xatolik kuzatilmagan",
+        "1.5": "1-2 o'rinda kuzatilgan",
+        "1": "3-4 o'rinda kuzatilgan",
+        "0.5": "5-6 o'rinda kuzatilgan",
+        "0": "7+ o'rinda kuzatilgan"
+      }
+    },
+    {
+      "id": 11,
+      "name": "Leksik xilma-xillik",
+      "category": "Lug'at boyligi",
+      "max_score": 2,
+      "description": "Tasviriy ifodalar, vaziyatga mos maxsus leksik birliklar, barqaror birikmalar",
+      "scoring": {
+        "2": "Xilma-xillik kuzatilgan, unumli foydalanilgan",
+        "1.5": "Xilma-xillik kuzatilgan, o'rinlarda foydalanilgan",
+        "1": "Xilma-xillik qisman foydalanilgan",
+        "0.5": "Xilma-xillik kuzatilmagan yoki noo'rin foydalanilgan",
+        "0": "Hech qanday tasviriy vosita ishlatilmagan"
+      }
+    },
+    {
+      "id": 12,
+      "name": "Til tozaligi",
+      "category": "Lug'at boyligi",
+      "max_score": 2,
+      "description": "Shevaga oid so'z, vulgarizm, varvarizm, parazit so'zlarning yo'qligi",
+      "scoring": {
+        "2": "Bunday so'zlar uchramaydi",
+        "1.5": "1-2 o'rinda uchragan, uslubiy g'alizlik yo'q",
+        "1": "3-4 o'rinda uchragan, uslubiy g'alizlik yuzaga kelgan",
+        "0.5": "5-6 o'rinda uchragan",
+        "0": "7+ o'rinda uchragan"
+      }
+    }
+  ],
+  "disqualification_conditions": [
+    "Esse yozilgan, lekin mavzuga mos bo'lmasa (2 ball)",
+    "Essening hajmi 100 ta so'zdan kam bo'lsa (2 ball)",
+    "Esse boshqa manbadan ko'chirilgan bo'lsa (2 ball)",
+    "Esse yozilmagan bo'lsa (0 ball)",
+    "Faqat kirish qismi yozilgan bo'lsa (0 ball)",
+    "Esse to'liq kirill alifbosida yozilgan bo'lsa (0 ball)"
+  ]
+}

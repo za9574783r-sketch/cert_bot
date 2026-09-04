@@ -1,0 +1,83 @@
+{
+  "_comment": "Qo'shimcha savollar banki. Mavjud question_bank.json ga qo'shiladi. Har bir bo'lim uchun yana 5-10 ta savol.",
+  "Imlo qoidalari": [
+    {"question": "Qaysi qatorda barcha so'zlar to'g'ri yozilgan?", "options": ["hamkasb, hamfikr, hamfahm", "ham-kasb, ham-fikr, hamfahm", "ham kasb, ham fikr, ham fahm", "hamkasbiy, hamfikrli, hamfahmli"], "correct": "A"},
+    {"question": "Defis orqali yozilgan so'zni toping.", "options": ["ko'p-qavatli", "ko'p qavatli", "ko'pqavatli", "ko'p, qavatli"], "correct": "A"},
+    {"question": "Birga yoziladigan so'zni aniqlang.", "options": ["asarhuk", "asarhuk", "asar-huk", "asaridish"], "correct": "B"},
+    {"question": "Bo'g'in ko'chirish xatosi bor so'zni ko'rsating.", "options": ["sa-vol", "havo-la", "daft-ar", "kit-ob"], "correct": "B"},
+    {"question": "Qaysi variantda barcha so'zlar to'g'ri yozilgan?", "options": ["raksado, marsiano, kaktus", "raksado, marsiano, kaktus", "rakado, marsiano, kaktus", "rakado, marsano, kaktuslar"], "correct": "B"},
+    {"question": "Aslida bo'g'in ko'chirish mumkin bo'lmagan so'z.", "options": ["massa", "klass", "yuz", "qaychi"], "correct": "B"},
+    {"question": "Qaysi so'zda ikki 'n' yoziladi?", "options": ["chinor", "sino", "qaynoq", "tun"], "correct": "A"},
+    {"question": "Imloviy xato bor so'zni toping.", "options": ["notanish", "notanish", "notanush", "notanush"], "correct": "B"}
+  ],
+  "Lug'at boyligi": [
+    {"question": "Sinonim juftlikni toping.", "options": ["quvonch - xursandchilik", "tez - sekin", "katta - kichik", "kun - tun"], "correct": "A"},
+    {"question": "Omonim so'zni toping.", "options": ["yuz (son) - yuz (yuz qismi)", "kitob - daftар", "ona - ayol", "aka - uka"], "correct": "A"},
+    {"question": "Frazeologizm ma'nosi: \"Qo'li uzun\".", "options": ["O'g'ri", "Mehnatkash", "Bashoratli", "Uzoqqa cho'zilgan"], "correct": "A"},
+    {"question": "Maqol to'ldirish: \"Oltinni olmos kesar, ...\".", "options": ["temirni cho'yan", "o'qni tosh", "suvni shamol", "do'stni dushman"], "correct": "A"},
+    {"question": "Antonim juftlik.", "options": ["g'azab - xursandchilik", "mazza - lazzat", "tez - shoshilmoq", "chiroyli - go'zal"], "correct": "A"},
+    {"question": "\"Boshi berk ko'cha\" iborasi ma'nosi.", "options": ["Chiqish yo'li yo'q vaziyat", "Uzun yo'l", "Tor ko'cha", "Aylanma yo'l"], "correct": "A"},
+    {"question": "Paronim so'z juftligini aniqlang.", "options": ["taqdim - ta'qid", "ota - ona", "kattа - kichik", "oq - qora"], "correct": "A"}
+  ],
+  "Til birliklari uslubiyati": [
+    {"question": "Publitsistik uslubga xos belgini aniqlang.", "options": ["Jamoatchilik fikrini shakllantirish", "Ilmiy dalillar", "Badiiy obrazlilik", "Yuridik aniqlik"], "correct": "A"},
+    {"question": "Qaysi gapda so'z ortiqcha qo'llangan?", "options": ["Bepusht ona bola tug'di", "Bola tug'ildi", "Ona bola tug'di", "Ona farzand ko'rdi"], "correct": "A"},
+    {"question": "Rasmiy uslubga xos gapni toping.", "options": ["Ushbu farmoyish asosida...", "Salom, qalaysan?", "Quyosh charaqlab turibdi", "Daraxtlar barg yozdi"], "correct": "A"},
+    {"question": "Badiiy uslubga xos belgi.", "options": ["Obrazlilik, emotsionallik", "Aniqlik, ixchamlik", "Logik izchillik", "Hujjat asosliligi"], "correct": "A"},
+    {"question": "Qaysi gap so'zlashuv uslubiga xos?", "options": ["Hoy, qani ketdik!", "Hurmatli fuqarolar", "Tajriba natijalari quyidagicha", "Majlis boshlanishi e'lon qilinadi"], "correct": "A"},
+    {"question": "Ilmiy uslubga xos so'zni toping.", "options": ["tajriba", "sirli", "chiroyli", "qiziq"], "correct": "A"},
+    {"question": "O'zlashma so'zni aniqlang.", "options": ["kompyuter", "kitob", "qalam", "daftar"], "correct": "A"}
+  ],
+  "Grammatika": [
+    {"question": "O'timdosh nima?", "options": ["O'tgan zamonni bildiruvchi fe'l shakli", "Hozirgi zamonni bildiruvchi fe'l", "Kelasi zamonni bildiruvchi fe'l", "Buyruq maylidagi fe'l"], "correct": "A"},
+    {"question": "Sifatdoshning vazifasi.", "options": ["Ega yoki kesimning belgisini bildiradi", "Harakatni bildiradi", "Obyektni bildiradi", "Vaqtni bildiradi"], "correct": "A"},
+    {"question": "Ravishdosh qatnashgan gapni toping.", "options": ["O'qib bilim oldi", "Kitob o'qidi", "Bilimli bola", "O'qish foydali"], "correct": "A"},
+    {"question": "Aniqlovchi qatnashgan gapni aniqlang.", "options": ["Qizil gul", "Gul ochildi", "Gul chiroyli", "Gul hidli"], "correct": "A"},
+    {"question": "Hol qatnashgan gapni toping.", "options": ["Ertalab uyg'ondi", "U uxlayapti", "Ona keldi", "Bola yugurdi"], "correct": "A"},
+    {"question": "To'ldiruvchi qatnashgan gap.", "options": ["Kitob o'qidi", "Yomg'ir yog'di", "Quyosh chiqdi", "Havo issiq"], "correct": "A"},
+    {"question": "Murakkab fe'lni toping.", "options": ["suv ichmoq", "yemoq", "ketmoq", "kelmoq"], "correct": "A"},
+    {"question": "Yordamchi fe'l ishtirok etgan so'z qo'rilmasini aniqlang.", "options": ["o'qib bo'ldi", "kitob", "yozdi", "keldi"], "correct": "A"}
+  ],
+  "Punktuatsiya": [
+    {"question": "Nuqta qo'yiladigan o'rinni aniqlang.", "options": ["Gap oxirida", "Ro'yxat ichida", "Qisqa pauzada", "Savol belgisi o'rnida"], "correct": "A"},
+    {"question": "Vergul qo'yiladigan holatni toping.", "options": ["Uyushiq bo'laklar orasiga", "Gap boshida", "Ega va kesim orasiga", "Tinish belgisiz"], "correct": "A"},
+    {"question": "Qo'shtirnoq ishlatiladigan holat.", "options": ["Boshqaning so'zini keltirganda", "O'z fikrini aytganda", "His-hayajonni bildirganda", "Ta'rif berganda"], "correct": "A"},
+    {"question": "Tinish belgilari to'g'ri qo'yilgan variantni toping.", "options": ["Salom, Aziz! Qalaysan?", "Salom Aziz Qalaysan", "Salom, Aziz Qalaysan", "Salom Aziz, Qalaysan!"], "correct": "A"},
+    {"question": "Ikki nuqta (:) qo'yilishi kerak bo'lgan gap.", "options": ["U quyidagilarni aytdi: tinchlik, do'stlik, hamkorlik", "U tinchlik va do'stlik haqida gapirdi", "U tinchlikni yoqladi", "Tinchlik eng katta boylik"], "correct": "A"},
+    {"question": "Nuqtali vergul (;) qo'yish kerak bo'lgan holat.", "options": ["Murakkab gap bo'laklari orasida", "Oddiy gap oxirida", "Ro'yxat ichida", "Savol o'rnida"], "correct": "A"}
+  ],
+  "Adabiyot nazariyasi va tarixi": [
+    {"question": "Alisher Navoiy qaysi asarida falsafiy qarashlarini bayon etgan?", "options": ["Hayrat ul-abror", "Farhod va Shirin", "Layli va Majnun", "Saddi Iskandariy"], "correct": "A"},
+    {"question": "Bobur asosladi?", "options": ["Boburiylar davlatini (Hindiston)", "Buxoro xonligini", "Xiva xonligini", "Qoqon xonligini"], "correct": "A"},
+    {"question": "Cho'lpon asl ismi?", "options": ["Abdulhamid Sulaymon o'g'li", "Abdurauf", "Abdulla", "Oybek"], "correct": "A"},
+    {"question": "Oybek — qaysi sohaning asoschisi?", "options": ["O'zbek romanchiligining", "O'zbek she'riyatining", "O'zbek dramaturgiyasining", "O'zbek nasrining"], "correct": "A"},
+    {"question": "G'afur G'ulom qaysi janrda mashhur?", "options": ["She'riyat", "Roman", "Drama", "Povest"], "correct": "A"},
+    {"question": "Abdulla Qahhor — qaysi sohada tanilgan?", "options": ["Hikoyalar, dramalar", "She'rlar", "Romanlar", "Maqolalar"], "correct": "A"},
+    {"question": "O'tkir Hoshimov — qaysi davr adibi?", "options": ["Mustaqillik davri", "Sovet davri", "Jadidchilik davri", "Temuriylar davri"], "correct": "A"},
+    {"question": "Pirimqul Qodirov qaysi tarixiy roman muallifi?", "options": ["Yulduzli tunlar, Avlodlar dovoni", "O'tgan kunlar", "Sarob", "Mehrobdan chayon"], "correct": "A"},
+    {"question": "Maqol — qaysi janrga mansub?", "options": ["Xalq og'zaki ijodi", "Badiiy adabiyot", "Ilmiy adabiyot", "Publitsistik"], "correct": "A"},
+    {"question": "Ertak janrining asosiy belgisi?", "options": ["Sehrli yoki real voqealar, xalq og'zaki ijodi", "Ilmiy tahlil", "She'riy shakl", "Dramatik dialog"], "correct": "A"}
+  ],
+  "O'qish savodxonligi": [
+    {"question": "Matnda ifodalangan asosiy fikr nima?", "options": ["Matnning markaziy g'oyasi", "Matnning birinchi gap", "Matnning oxirgi gap", "Matnning muallifi"], "correct": "A"},
+    {"question": "Matn tilidagi metaforani toping.", "options": ["Yurak tosh (juda qattiq)", "Oq qog'oz", "Yorqin kun", "Issiq choy"], "correct": "A"},
+    {"question": "Epitet — bu nima?", "options": ["Narsaning belgisini bildiruvchi badiiy vosita", "Narsalarni qiyoslash", "Mubolag'a", "Kinoya"], "correct": "A"},
+    {"question": "Tasvir vositasini aniqlang: \"Daryo shoshilardi\".", "options": ["Jonlantirish (personifikatsiya)", "Metafora", "Epitet", "Qiyoslash"], "correct": "A"},
+    {"question": "Ohangdorlikka oid badiiy vosita.", "options": ["Alliteratsiya, assonans", "Metafora", "Epitet", "Tasviriy ifoda"], "correct": "A"},
+    {"question": "Matnning g'oyaviy mazmunini aniqlash uchun nima qilish kerak?", "options": ["Muallif fikrini tahlil qilish", "Faqat so'zlarni tarjima qilish", "Faqat sarlavhani o'qish", "Faqat xulosani o'qish"], "correct": "A"},
+    {"question": "Badiiy matn nima?", "options": ["Obrazli, emotsional ta'sir etuvchi matn", "Ilmiy maqola", "Rasmiy hujjat", "Reklama matni"], "correct": "A"}
+  ],
+  "Mavzular doirasida moslashtirish": [
+    {"question": "Muallif-asar juftligini moslashtiring. 1) Navoiy 2) Bobur 3) Muqimi. a) \"Boburnoma\" b) \"Xamsa\" c) \"Tanlangan asarlar\".", "options": ["1-b, 2-a, 3-c", "1-a, 2-b, 3-c", "1-c, 2-a, 3-b", "1-b, 2-c, 3-a"], "correct": "A"},
+    {"question": "Davr va adib juftligi: 1) Mustaqillik 2) Sovet 3) Jadid. a) O'tkir Hoshimov b) Oybek c) Cho'lpon.", "options": ["1-a, 2-b, 3-c", "1-b, 2-c, 3-a", "1-c, 2-a, 3-b", "1-a, 2-c, 3-b"], "correct": "A"},
+    {"question": "Asar va janr: 1) \"O'tgan kunlar\" 2) \"Yulduzli tunlar\" 3) \"Oybek\". a) Tarixiy roman b) Roman c) She'riy to'plam.", "options": ["1-b, 2-a, 3-c", "1-a, 2-b, 3-c", "1-c, 2-b, 3-a", "1-b, 2-c, 3-a"], "correct": "A"}
+  ],
+  "Lingvistik va badiiy tahlil": [
+    {"question": "Sintaktik tahlil nimani o'z ichiga oladi?", "options": ["Gap bo'laklarini aniqlash", "So'z ma'nolarini tahlil qilish", "Imlo qoidalarini tekshirish", "Matn g'oyasini aniqlash"], "correct": "A"},
+    {"question": "Morfologik tahlil nima?", "options": ["So'zning tarkibiy qismlarini aniqlash", "Gap bo'laklarini tahlil qilish", "Matn mazmunini tahlil", "Punktuatsiyani tekshirish"], "correct": "A"},
+    {"question": "Badiiy tahlil maqsadi.", "options": ["Badiiy vositalar va g'oyani aniqlash", "Imlo xatolarini topish", "Gap bo'laklarini aniqlash", "So'z ma'nosini izohlash"], "correct": "A"},
+    {"question": "Qo'shma gap turlarini aniqlang.", "options": ["Bog'langan va ergashgan", "Sodda va qo'shma", "Darak va so'roq", "Ma'lum va norasm"], "correct": "A"},
+    {"question": "Ergash gap nima?", "options": ["Asosiy gapga tobe bo'lgan qism", "Mustaqil gap", "Savol gap", "Yordamchi gap"], "correct": "A"},
+    {"question": "Uyushiq bo'lakli gapni toping.", "options": ["Ota, ona va bolalar bog'da sayr qildi", "Ota bog'da ishladi", "Ona uyga keldi", "Bolalar uxladi"], "correct": "A"}
+  ]
+}

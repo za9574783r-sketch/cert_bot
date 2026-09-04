@@ -1,9 +1,18 @@
-"""AI Service for generating lessons and quizzes via OpenRouter API"""
+"""AI Service for generating lessons and quizzes.
+
+Provider priority:
+1. ``GEMINI_API_KEY`` (Google Gemini 2.0 Flash) — preferred, fast, free tier
+2. ``OPENROUTER_API_KEY`` (OpenRouter free models) — fallback
+
+Both providers expose the same payload shape: a single system + user
+prompt, returning plain text. OpenRouter may wrap it in markdown code
+fences, so we strip those before parsing.
+"""
 import json
 import aiohttp
 import asyncio
 from typing import Dict, List, Optional
-from config import OPENROUTER_API_KEY
+from config import OPENROUTER_API_KEY, GEMINI_API_KEY
 
 from database.crud import (
     get_topic_by_grade_and_title,
@@ -14,7 +23,11 @@ from database.crud import (
 )
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-MODEL = "meta-llama/llama-3.1-8b-instruct:free"  # Free model
+OPENROUTER_MODEL = "meta-llama/llama-3.1-8b-instruct:free"
+GEMINI_URL = (
+    "https://generativelanguage.googleapis.com/v1beta/models/"
+    "gemini-2.0-flash:generateContent"
+)
 
 SYSTEM_PROMPT_LESSON = """Sen O'zbekiston Milliy Sertifikat imtihoniga tayyorlovchi o'quvchilar uchun dars tayyorlovchi AI yordamchisisan.
 
@@ -62,8 +75,54 @@ JSON format:
 Javob faqat JSON bo'lsin, hech qanday qo'shimcha matnsiz."""
 
 
+def _provider() -> str:
+    if GEMINI_API_KEY and GEMINI_API_KEY != "your_gemini_api_key_here":
+        return "gemini"
+    if OPENROUTER_API_KEY and OPENROUTER_API_KEY != "your_openrouter_api_key_here":
+        return "openrouter"
+    return "none"
+
+
 def _ai_available() -> bool:
-    return bool(OPENROUTER_API_KEY) and OPENROUTER_API_KEY != "your_openrouter_api_key_here"
+    return _provider() != "none"
+
+
+async def _call_gemini(system_prompt: str, user_prompt: str) -> Optional[str]:
+    """Call Google Gemini and return the first text candidate."""
+    payload = {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [
+                    {"text": system_prompt + "\n\n" + user_prompt}
+                ],
+            }
+        ],
+        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 3000},
+    }
+    try:
+        async with aiohttp.ClientSession() as session:
+            url = f"{GEMINI_URL}?key={GEMINI_API_KEY}"
+            async with session.post(
+                url, json=payload, timeout=aiohttp.ClientTimeout(total=60)
+            ) as response:
+                if response.status != 200:
+                    err = await response.text()
+                    print(f"Gemini error {response.status}: {err[:200]}")
+                    return None
+                data = await response.json()
+                candidates = data.get("candidates", [])
+                if not candidates:
+                    return None
+                parts = candidates[0].get("content", {}).get("parts", [])
+                text = "".join(p.get("text", "") for p in parts)
+                return text.strip() if text else None
+    except asyncio.TimeoutError:
+        print("Gemini timeout")
+        return None
+    except Exception as e:
+        print(f"Gemini exception: {e}")
+        return None
 
 
 async def _call_openrouter(payload: dict) -> Optional[str]:
@@ -103,8 +162,27 @@ async def _call_openrouter(payload: dict) -> Optional[str]:
         return None
 
 
+async def _call_llm(system_prompt: str, user_prompt: str, *, json_mode: bool = False) -> Optional[str]:
+    """Provider-agnostic LLM call. Returns raw text or None."""
+    provider = _provider()
+    if provider == "gemini":
+        return await _call_gemini(system_prompt, user_prompt)
+    if provider == "openrouter":
+        payload = {
+            "model": OPENROUTER_MODEL,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            "temperature": 0.5 if json_mode else 0.7,
+            "max_tokens": 2000 if json_mode else 3000,
+        }
+        return await _call_openrouter(payload)
+    return None
+
+
 async def generate_lesson(subject: str, grade: int, topic_title: str) -> Optional[str]:
-    """Generate lesson content via OpenRouter API"""
+    """Generate lesson content via the active LLM provider."""
     if not _ai_available():
         return None
 
@@ -115,22 +193,11 @@ Mavzu: {topic_title}
 
 Ushbu mavzu bo'yicha Milliy Sertifikat imtihoniga tayyorlovchi {grade}-sinf o'quvchisi uchun 0 dan mukammal darajagacha tushuntiruvchi dars yozing.
 """
-
-    payload = {
-        "model": MODEL,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT_LESSON},
-            {"role": "user", "content": user_prompt},
-        ],
-        "temperature": 0.7,
-        "max_tokens": 3000,
-    }
-
-    return await _call_openrouter(payload)
+    return await _call_llm(SYSTEM_PROMPT_LESSON, user_prompt)
 
 
 async def generate_quizzes(lesson_content: str, topic_title: str) -> Optional[List[Dict]]:
-    """Generate 5 quiz questions via OpenRouter API"""
+    """Generate 5 quiz questions via the active LLM provider."""
     if not _ai_available():
         return None
 
@@ -142,18 +209,7 @@ Dars mazmuni:
 
 Ushbu dars bo'yicha 5 ta test savoli yarating.
 """
-
-    payload = {
-        "model": MODEL,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT_QUIZ},
-            {"role": "user", "content": user_prompt},
-        ],
-        "temperature": 0.5,
-        "max_tokens": 2000,
-    }
-
-    content = await _call_openrouter(payload)
+    content = await _call_llm(SYSTEM_PROMPT_QUIZ, user_prompt, json_mode=True)
     if not content:
         return None
 

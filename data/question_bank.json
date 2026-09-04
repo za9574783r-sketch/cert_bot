@@ -1,0 +1,66 @@
+{
+  "_comment": "Milliy Sertifikat imtihoni uchun namuna savollar banki. Manba: DTM 'Ona tili va adabiyot fanidan namunaviy test topshiriqlari' 2023-2024",
+  "Imlo qoidalari": [
+    {"question": "Imloviy jihatdan to'g'ri yozilgan so'zlar qatorini aniqlang.", "options": ["taassuf, murojatnoma, tabiiy", "tanazzul, muassasa, ma'dad", "muvofiq, taasurot, taalluqli", "maishiy, tafovut, tafakkur"], "correct": "B"},
+    {"question": "Qaysi qatorda barcha so'zlar to'g'ri yozilgan?", "options": ["o'z-o'zidan, hol-ahvol, tarjimayi-hol", "o'zidan-o'zi, voy-voy, baxt-u saodat", "o'z-o'zicha, voy-voyiga, baxt-saodatli", "o'z-o'zligicha, voyvoyak, tarjimai-hol"], "correct": "A"},
+    {"question": "Tinish belgilari to'g'ri qo'yilgan gapni toping.", "options": ["Ismat ota ochiq derazadan boshini chiqarib, o'g'lini chaqirdi.", "Yig'ilishda aytilgan anchagina muammolar ochiq qoldi.", "Haftaning dushanba kuni, ochiq eshiklar kuni deb e'lon qilindi.", "Nafisa o'z fikrlarini ko'pchilik oldida ham: ochiq ifoda qila olardi."], "correct": "A"},
+    {"question": "Bo'g'in ko'chirish to'g'ri bajarilgan so'zni ko'rsating.", "options": ["dao-mat", "koo-perativ", "peo-dagog", "foo-tbol"], "correct": "B"},
+    {"question": "Qo'shib yozilgan so'zni aniqlang.", "options": ["ko'p o'g'izli", "ko'p oyoqli", "ko'pmillatli", "ko'p qavatli"], "correct": "C"}
+  ],
+  "Lug'at boyligi": [
+    {"question": "O'zaro ma'nodoshlik hosil qila oladigan so'zlarni aniqlang.", "options": ["farq - tafovut - noo'xshash", "sumbat - gavda - basavlat", "g'alati - ajoyib - qasoskor", "o'ch - intiqom - turfa"], "correct": "A"},
+    {"question": "Antonim juftlikni toping.", "options": ["savol - javob", "katta - ulkan", "oq - sariq", "tez - shoshilmoq"], "correct": "A"},
+    {"question": "\"G'urur\" so'zi \"kibr\" ma'nosida qo'llangan gapni aniqlang.", "options": ["Gapingizni qarang, bunchalik g'ururga berilmang.", "Do'ppi - o'zbek xalqining milliy iftixori.", "G'ofur aka chin inson va otashnafas shoir edi.", "Uning yigitlik g'ururi yordam so'rab borishga yo'l qo'ymadi."], "correct": "A"},
+    {"question": "Maqol to'ldirish uchun mos so'zni tanlang: \"Ilm olish — ... olish\".", "options": ["nur", "yorug'lik", "ziyo", "yulduz"], "correct": "A"},
+    {"question": "Frazeologizm ma'nosini to'g'ri tushuntirgan javobni toping: \"Boshini osmonga yetkazmoq\".", "options": ["Juda xafa bo'lmoq", "Juda quvonmoq", "Yuqoriga intilmoq", "Mag'rur bo'lmoq"], "correct": "B"}
+  ],
+  "Til birliklari uslubiyati": [
+    {"question": "Qaysi gapda qo'shimcha qo'llash bilan bog'liq uslubiy xatolik mavjud EMAS?", "options": ["Iqtisodiy islohotlarning sersamaradorligini ta'minlash uchun ishlar olib borilmoqda.", "So'zlarimizning ma'noviy bo'yoqdorliligi nutqimiz jozibasini yanada oshiradi.", "Qadriyatlarimizga nopisandsizlik bilan munosabatda bo'lish milliy fojiamizdir.", "Olimlarimiz havola etayotgan ushbu loyiha yashash sifatini oshirishga qaratilgan."], "correct": "B"},
+    {"question": "Berilgan gapda ko'makchi qanday mazmuniy munosabat ifodalagan? \"Buyuk bobolarimizning ma'naviy merosi xususida so'z yuritganimizda Navoiyning 'Xamsa' asarini alohida tilga olamiz.\"", "options": ["vosita ma'nosini", "fikr mavzusi ma'nosini", "tarz, holat ma'nosini", "yo'nalish ma'nosini"], "correct": "B"},
+    {"question": "Iborada qo'llangan ko'makchining ma'nosini aniqlang: \"Do'stlar haqida gapirdi\".", "options": ["Vaqt", "Mavzu", "Sabab", "O'rin"], "correct": "B"},
+    {"question": "Qaysi gapda so'z ortiqcha qo'llangan?", "options": ["Men o'zim boraman", "Ular yig'ilishdi", "Biz kitob o'qidik", "Hamma keldi"], "correct": "A"},
+    {"question": "To'g'ri ifodalangan gapni toping.", "options": ["Uning so'zlashi juda ham yaxshi", "Uning so'zlashi yaxshi", "Uning so'zlashi juda yaxshi", "Uning so'zlashi ham yaxshi"], "correct": "B"}
+  ],
+  "Grammatika": [
+    {"question": "Berilgan gapdagi egani aniqlang: \"Quyosh asta-sekin botib borayotgan edi\".", "options": ["asta-sekin", "Quyosh", "botib borayotgan", "edi"], "correct": "B"},
+    {"question": "Fe'lning qaysi shakli ishtirok etgan? \"O'qigan kitoblarimni esladim\".", "options": ["Sifatdosh", "Ravishdosh", "Harakat nomi", "Fe'l"], "correct": "A"},
+    {"question": "Ravish holi qatnashgan gapni toping.", "options": ["U tez yugurdi", "Yomg'ir yog'di", "Bola uxlayapti", "Ona keldi"], "correct": "A"},
+    {"question": "Sifat qo'llanilgan gapni aniqlang.", "options": ["Qizil gul", "Gul ochildi", "Gul hidli", "Gul chiroyli"], "correct": "A"},
+    {"question": "Son so'z turkumi ishtirok etgan gapni toping.", "options": ["Besh kitob", "Kitob o'qidi", "Kitob qiziqarli", "Kitob yotibdi"], "correct": "A"},
+    {"question": "Qaysi gapda to'ldiruvchi bor?", "options": ["Men kitob o'qidim", "Bola tez yugurdi", "Havo issiq", "Ona kuldi"], "correct": "A"}
+  ],
+  "Punktuatsiya": [
+    {"question": "Qaysi gaplarda tire o'zaro bir xil punktuatsion qoida asosida qo'yilgan?\n1) \"Soni bor — sifati yo'q\"\n2) \"Islohotlardan maqsad — sifatli ta'lim\"\n3) \"Vatan muqaddas sajdagohdir\" — derdi ustoz.\n4) Insonning ustozi — hayot.\n5) Til, adabiyot va madaniyat — barchasi millat borligi.", "options": ["2 va 3", "1 va 2", "5 va 6", "2 va 4"], "correct": "D"},
+    {"question": "Tinish belgilari to'g'ri qo'yilgan variantni tanlang.", "options": ["Salom, do'stim!", "Salom do'stim.", "Salom, do'stim.", "Salom do'stim!"], "correct": "C"},
+    {"question": "Qo'shtirnoq to'g'ri ishlatilgan gapni toping.", "options": ["U \"Men boraman\" — dedi.", "U men boraman — dedi.", "U men, boraman — dedi.", "U men boraman dedi."], "correct": "A"},
+    {"question": "Vergul kerak bo'lgan gapni aniqlang.", "options": ["Quyosh botar ekan olam yorishadi", "Quyosh botar ekan, olam yorishadi", "Quyosh botar, ekan olam yorishadi", "Quyosh botar ekan olam, yorishadi"], "correct": "B"}
+  ],
+  "Adabiyot nazariyasi va tarixi": [
+    {"question": "Alisher Navoiyning \"Xamsa\" asariga kiruvchi asarlar to'g'ri ko'rsatilgan qatorni aniqlang.", "options": ["Hayrat ul-abror, Farhod va Shirin, Layli va Majnun, Sab'ai sayyor, Saddi Iskandariy", "Xamsa, Lison ut-Tayr, Muhakamat al-Lughatayn, Majolis un-Nafois, Mahbub ul-Qulub", "Guliston, Bostan, Masnaviy, Ruboiylar, Devon", "Devoni Foniy, Hayrat ul-Abror, Sakkokiy, Siroj ul-Mushtoqin, Boqirxoni"], "correct": "A"},
+    {"question": "Bobur qaysi davlat asoschisi?", "options": ["Buxoro xonligi", "Xiva xonligi", "Boburiylar davlati (Hindiston)", "Qoqon xonligi"], "correct": "C"},
+    {"question": "Cho'lponning asl ismi nima?", "options": ["Abdurauf Fitrat", "Abdulloh Qahhor", "Abdulhamid Cho'lpon", "Oybek"], "correct": "C"},
+    {"question": "Oybekning mashhur romani qaysi?", "options": ["O'tgan kunlar", "Sarob", "Ulug' saltanat", "Mehrobdan chayon"], "correct": "A"},
+    {"question": "Maqol janriga mansub matnni toping.", "options": ["Ilm olish — nur olish", "Bobomning hikoyasi", "Yomg'ir yomg'ir ersang...", "Sevinch qo'shig'i"], "correct": "A"},
+    {"question": "Ertak janrining asosiy belgisini aniqlang.", "options": ["Ilmiy tushuntirish", "Sehrli voqealar, xalq ogzaki ijodi", "She'riy shakl", "Dramatik dialog"], "correct": "B"}
+  ],
+  "O'qish savodxonligi": [
+    {"question": "Matndan kelib chiqib, asosiy g'oyani aniqlang. (Namuna matn berilgan holda)", "options": ["Vatanparvarlik", "Ekologiya", "Ma'rifat", "Mehnatsevarlik"], "correct": "A"},
+    {"question": "Berilgan she'r parchasining mavzusini aniqlang.", "options": ["Tabiat go'zalligi", "Ona haqida", "Sevgi", "Vatan"], "correct": "B"},
+    {"question": "Matnda ishlatilgan metaforani toping.", "options": ["Yurak tosh", "Oltin qo'l", "Oq laylak", "Yorqin kun"], "correct": "A"},
+    {"question": "Berilgan parchaning uslubini aniqlang.", "options": ["Badiiy", "Ilmiy", "Publitsistik", "Rasmiy"], "correct": "C"},
+    {"question": "Muallifning asosiy fikrini ifodalang.", "options": ["Oila — jamiyat poydevori", "Sport — sog'lik garovi", "Ilm — hayot chirog'i", "Mehnat — baxt kaliti"], "correct": "C"}
+  ],
+  "Mavzular doirasida moslashtirish": [
+    {"question": "Muallif va asar juftligini moslashtiring: 1) Navoiy 2) Bobur 3) Oybek. a) \"O'tgan kunlar\" b) \"Xamsa\" c) \"Boburnoma\"", "options": ["1-b, 2-c, 3-a", "1-a, 2-b, 3-c", "1-c, 2-a, 3-b", "1-b, 2-a, 3-c"], "correct": "A"},
+    {"question": "Janr va asar mosligini toping: 1) Ertak 2) Doston 3) Roman. a) \"Alpomish\" b) \"O'tgan kunlar\" c) \"Saddi Iskandariy\"", "options": ["1-a, 2-b, 3-c", "1-a, 2-c, 3-b", "1-c, 2-b, 3-a", "1-b, 2-c, 3-a"], "correct": "B"},
+    {"question": "Adib va davr juftligini aniqlang: 1) Navoiy 2) Nodira 3) Muqimi. a) XIX asr oxiri b) XV asr c) XIX asr boshlari", "options": ["1-b, 2-c, 3-a", "1-a, 2-b, 3-c", "1-c, 2-a, 3-b", "1-b, 2-a, 3-c"], "correct": "A"}
+  ],
+  "Lingvistik va badiiy tahlil": [
+    {"question": "She'riy parchadagi badiiy tasvir vositasini aniqlang: \"Oq bulutlar osmonda suzadi\".", "options": ["Metafora", "Qiyoslash", "Tasviriy ifoda (epitet)", "Allyutorasiya"], "correct": "C"},
+    {"question": "Berilgan gapdagi sintaktik konstruksiyani aniqlang: \"Bozor — hayotning ko'zgusi\".", "options": ["Sodda gap", "Qo'shma gap", "Tireli konstruksiya", "Uyushiq bo'lakli gap"], "correct": "C"},
+    {"question": "Fe'lning ma'no turini aniqlang: \"yugurmoq\".", "options": ["Aniq fe'l", "Mantiqiy fe'l", "His-hayajon fe'li", "Holat fe'li"], "correct": "A"}
+  ],
+  "Yozma savodxonlik": [
+    {"question": "Esse yozish uchun vaziyat matni va ikki xil qarash beriladi. Talabgor vaziyat yuzasidan ikkala qarashni yoritishi va shaxsiy fikr bildirishi kerak.", "options": null, "correct": null}
+  ]
+}

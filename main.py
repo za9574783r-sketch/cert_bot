@@ -16,6 +16,10 @@ from handlers import (
     topic_router,
     quiz_router,
     webapp_router,
+    essay_router,
+    exam_router,
+    stats_router,
+    help_router,
 )
 from webapp.server import build_app
 
@@ -44,6 +48,10 @@ async def main() -> None:
     dp.include_router(topic_router)
     dp.include_router(quiz_router)
     dp.include_router(webapp_router)
+    dp.include_router(essay_router)
+    dp.include_router(exam_router)
+    dp.include_router(stats_router)
+    dp.include_router(help_router)
 
     # Mini App HTTP server
     app = build_app()

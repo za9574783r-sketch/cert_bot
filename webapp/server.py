@@ -27,6 +27,21 @@ def build_app() -> web.Application:
     app.router.add_get("/api/quiz/{topic_id:\\d+}", api.quiz_list)
     app.router.add_post("/api/quiz/{topic_id:\\d+}/submit", api.quiz_submit)
 
+    # Essay endpoints
+    app.router.add_get("/api/essay/topics", api.essay_topics)
+    app.router.add_get("/api/essay/topic/{id:\\d+}", api.essay_topic)
+    app.router.add_post("/api/essay/grade", api.essay_grade)
+
+    # Exam simulator endpoints
+    app.router.add_get("/api/exam/meta", api.exam_meta)
+    app.router.add_get("/api/exam/generate", api.exam_generate)
+    app.router.add_post("/api/exam/grade", api.exam_grade)
+
+    # User progress endpoints
+    app.router.add_get("/api/user/{id:\\d+}/stats", api.user_stats)
+    app.router.add_get("/api/user/{id:\\d+}/attempts", api.user_attempts)
+    app.router.add_get("/api/leaderboard", api.leaderboard)
+
     # Static files (CSS, JS, images, vendor libs)
     app.router.add_static("/static/", path=str(STATIC_DIR), show_index=False)
 

@@ -1,0 +1,125 @@
+{
+  "_comment": "O'zbekiston Milliy Sertifikat imtihoni uchun esse mavzulari. Har bir mavzu — vaziyat matni va 2 ta qarashni o'z ichiga oladi. Talabgor vaziyat yuzasidan ikkala qarashni yoritishi va shaxsiy fikr bildirishi kerak.",
+  "topics": [
+    {
+      "id": 1,
+      "title": "Til — millatning ruhiy ko'zgusi",
+      "situation": "Bugungi kunda yoshlar o'rtasida ona tilida so'zlashmay, ko'proq chet tiliga murojaat qilish holatlari ko'paymoqda. Bir guruh o'qituvchilar buni ijobiy holat deb hisoblasa, boshqalari ona tilimizga putur yetkazish, deb qaraydi.",
+      "viewpoint_a": "Yoshlar chet tilini bilishi — jahon integratsiyasining zaruriy qismi, bu ijobiy holat.",
+      "viewpoint_b": "Ona tilini unutish — milliy o'zlikni yo'qotish, bu xavfli tendensiya.",
+      "required_personal_view": true,
+      "difficulty": "o'rta",
+      "category": "til-madaniyat"
+    },
+    {
+      "id": 2,
+      "title": "Kitob o'qish — ma'naviy oziq",
+      "situation": "Raqamli texnologiyalar rivojlangan bugungi davrda yoshlar kitob o'qishdan ko'ra telefon, kompyuter orqali ma'lumot olishni afzal ko'rmoqda. Mutaxassislar fikricha, bu ma'naviy tanazzulga olib keladi.",
+      "viewpoint_a": "Zamonaviy texnologiyalar bilim olishning samarali vositasi, kitob o'qish eskirgan.",
+      "viewpoint_b": "Kitob o'qish insonni ma'naviy boyitadi, ongni charxlaydi — bu zaruriy odat.",
+      "required_personal_view": true,
+      "difficulty": "o'rta",
+      "category": "ma'naviyat"
+    },
+    {
+      "id": 3,
+      "title": "Ekologiya va inson mas'uliyati",
+      "situation": "Respublikamizda havo ifloslanishi, daryolarning qurib borayotgani, yashil hududlarning kamayishi kabi ekologik muammolar dolzarb. Ba'zi ekspertlar buni ishlab chiqarishning zaruriy qismi, desalar, boshqalar atrof-muhitni asrash insonning asosiy burchi, deb hisoblaydi.",
+      "viewpoint_a": "Sanoat rivoji iqtisodiy taraqqiyot uchun zarur, ekologiya ikkinchi darajali masala.",
+      "viewpoint_b": "Ekologik muvozanat buzilishi insoniyat uchun eng katta xavf, uni asrash shart.",
+      "required_personal_view": true,
+      "difficulty": "o'rta",
+      "category": "ekologiya"
+    },
+    {
+      "id": 4,
+      "title": "Ilm-ma'rifat — taraqqiyot kaliti",
+      "situation": "O'zbekistonda ilm-fan va ta'lim sohasiga katta e'tibor qaratilmoqda. Bir guruh olimlar ilmiy tadqiqotlarga ko'proq mablag' ajratish kerak, desalar, boshqalari amaliy ta'lim sifatini oshirish muhimroq, deb hisoblaydi.",
+      "viewpoint_a": "Ilmiy tadqiqotlar — davlat taraqqiyotining asosi, ularga katta sarmoya kerak.",
+      "viewpoint_b": "Amaliy ta'lim sifatini oshirish — jamiyat ehtiyoji, ilm nazariyasi amaliyotsiz samarasiz.",
+      "required_personal_view": true,
+      "difficulty": "o'rta",
+      "category": "ta'lim"
+    },
+    {
+      "id": 5,
+      "title": "Oila — jamiyatning poydevori",
+      "situation": "Zamonaviy jamiyatda oila instituti o'zgarishlar bilan yuzlashmoqda: yoshlar kechroq oila qurmoqda, ajrimlar soni ortmoqda. Psixologlar va sotsiologlar bu borada turlicha fikr bildiradi.",
+      "viewpoint_a": "Oilaviy qadriyatlar o'zgarmoqda, bu tabiiy jarayon, davlat aralashmasligi kerak.",
+      "viewpoint_b": "Oila — millat genofondi, uni mustahkamlash davlat siyosati darajasida bo'lishi kerak.",
+      "required_personal_view": true,
+      "difficulty": "o'rta",
+      "category": "jamiyat"
+    },
+    {
+      "id": 6,
+      "title": "Texnologiya va mehnat",
+      "situation": "Sun'iy intellekt va robototexnika ishlab chiqarishda keng qo'llanilmoqda. Bir guruh mutaxassislar bu samaradorlikni oshiradi, insonlarni og'ir mehnatdan ozod qiladi, desalar, boshqalar ish o'rinlarini yo'qotish xavfi bor, deb ogohlantiradi.",
+      "viewpoint_a": "Texnologiya taraqqiyot — u inson hayotini yengillashtiradi, yangi kasblar yaratadi.",
+      "viewpoint_b": "Avtomatlashtirish millionlab odamlarni ishsiz qiladi, ijtimoiy inqirozga olib keladi.",
+      "required_personal_view": true,
+      "difficulty": "yuqori",
+      "category": "texnologiya"
+    },
+    {
+      "id": 7,
+      "title": "Vatanparvarlik — zamonaviy talqin",
+      "situation": "Bugungi yoshlar vatanparvarlikni qanday tushunadi? Ba'zilar uni harbiy xizmat bilan, desalar, boshqalar bilim olish, kasb egallash, Vatan iqtisodiyotini rivojlantirish bilan bog'laydi.",
+      "viewpoint_a": "Vatanparvarlik — bu Vatan himoyasi uchun harbiy tayyorgarlik va jasorat.",
+      "viewpoint_b": "Vatanparvarlik — bu Vatan uchun foydali kasb egallab, uning iqtisodiyotini yuksaltirish.",
+      "required_personal_view": true,
+      "difficulty": "o'rta",
+      "category": "ma'naviyat"
+    },
+    {
+      "id": 8,
+      "title": "Sport va sog'lom turmush",
+      "situation": "O'zbekistonda sog'lom turmush tarzini targ'ib qilish davlat siyosati darajasiga ko'tarilgan. Mutaxassislar fikricha, sport bilan shug'ullanish har bir fuqaroning burchi yoki ixtiyoriy ish.",
+      "viewpoint_a": "Sog'lom turmush — shaxsiy tanlov, davlat faqat imkon yaratib berishi kerak.",
+      "viewpoint_b": "Sog'lom avlod — davlat kuchi, sportni ommalashtirish davlatning asosiy vazifasi.",
+      "required_personal_view": true,
+      "difficulty": "o'rta",
+      "category": "jamiyat"
+    },
+    {
+      "id": 9,
+      "title": "An'ana va zamonaviy o'zgarishlar",
+      "situation": "Milliy urf-odatlar, an'analar asrlar davomida shakllangan. Bugungi kunda ularning ayrimlari zamonaviy hayotga mos kelmaydi, degan fikrlar ham mavjud. An'analarni saqlash yoki yangilash kerakmi?",
+      "viewpoint_a": "An'analar xalqning boyligi, ularni asrab-avaylash asosiy burch.",
+      "viewpoint_b": "An'analar zamon bilan birga rivojlanishi, eskirganlari o'zgarishi kerak.",
+      "required_personal_view": true,
+      "difficulty": "o'rta",
+      "category": "ma'naviyat"
+    },
+    {
+      "id": 10,
+      "title": "Ona tili — mustaqillik timsoli",
+      "situation": "O'zbek tiliga davlat tili maqomi berilganiga 35 yildan oshdi. Bir guruh tilshunoslar tilimizga kirib kelgan chet so'zlari uni boyitadi, desalar, boshqalari ona tilimizni bulg'ayapti, deb hisoblaydi.",
+      "viewpoint_a": "Chet so'zlari tilimizni boyitadi, ularsiz zamonaviy tilni tasavvur qilib bo'lmaydi.",
+      "viewpoint_b": "Ona tilimiz o'z so'z boyligiga ega, chet so'zlari uning o'rnini bosa olmaydi.",
+      "required_personal_view": true,
+      "difficulty": "yuqori",
+      "category": "til-madaniyat"
+    },
+    {
+      "id": 11,
+      "title": "Ijtimoiy tarmoqlar — foyda yoki zarar",
+      "situation": "Yoshlar orasida ijtimoiy tarmoqlarda o'tkaziladigan vaqt keskin ortgan. Psixologlar buni ruhiy salomatlikka tahdid, desalar, marketing mutaxassislari — zamonaviy hayot zaruriy qismi, deb baholaydi.",
+      "viewpoint_a": "Ijtimoiy tarmoqlar — aloqa, ta'lim, biznes vositasi, ularsiz hayot to'liqsiz.",
+      "viewpoint_b": "Ijtimoiy tarmoqlar yoshlar ruhiyatiga salbiy ta'sir ko'rsatadi, jismoniy sog'liqqa zarar.",
+      "required_personal_view": true,
+      "difficulty": "o'rta",
+      "category": "texnologiya"
+    },
+    {
+      "id": 12,
+      "title": "Mehnatsevarlik qadriyati",
+      "situation": "Yangi avlod vakillarining mehnatsevarlikka munosabati o'zgarmoqda. Ba'zilar yoshlar dangasa bo'lib qolmoqda, desalar, boshqalar ular faqat boshqa turdagi mehnat bilan shug'ullanmoqda, deb hisoblaydi.",
+      "viewpoint_a": "Yoshlar mehnatsevarlikni yo'qotmoqda, ularni jismoniy mehnatga jalb etish kerak.",
+      "viewpoint_b": "Yoshlar intellektual mehnatga, kreativ faoliyatga intilmoqda — bu ham mehnat.",
+      "required_personal_view": true,
+      "difficulty": "o'rta",
+      "category": "jamiyat"
+    }
+  ]
+}

@@ -50,6 +50,41 @@ CREATE TABLE IF NOT EXISTS quizzes (
 CREATE INDEX IF NOT EXISTS idx_grades_subject ON grades(subject_id);
 CREATE INDEX IF NOT EXISTS idx_topics_grade ON topics(grade_id);
 CREATE INDEX IF NOT EXISTS idx_quizzes_topic ON quizzes(topic_id);
+
+-- User progress: each Telegram user has a row of accumulated statistics
+CREATE TABLE IF NOT EXISTS user_stats (
+    user_id INTEGER PRIMARY KEY,
+    username TEXT,
+    full_name TEXT,
+    first_seen_at TEXT NOT NULL DEFAULT (datetime('now')),
+    last_active_at TEXT NOT NULL DEFAULT (datetime('now')),
+    quizzes_taken INTEGER NOT NULL DEFAULT 0,
+    quizzes_correct INTEGER NOT NULL DEFAULT 0,
+    essays_graded INTEGER NOT NULL DEFAULT 0,
+    essays_total_score REAL NOT NULL DEFAULT 0,
+    exams_taken INTEGER NOT NULL DEFAULT 0,
+    exams_total_score REAL NOT NULL DEFAULT 0,
+    exams_max_score REAL NOT NULL DEFAULT 0
+);
+
+-- Per-attempt records: every quiz/essay/exam submission is stored here
+-- so users can see their history and we can compute aggregates.
+CREATE TABLE IF NOT EXISTS attempts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    kind TEXT NOT NULL CHECK (kind IN ('quiz', 'essay', 'exam')),
+    ref_id INTEGER,
+    payload TEXT NOT NULL,            -- JSON: questions snapshot, essay text, etc.
+    score REAL NOT NULL DEFAULT 0,    -- 0..max_score
+    max_score REAL NOT NULL DEFAULT 0,
+    percentage REAL NOT NULL DEFAULT 0,
+    level TEXT,                       -- A+, A, B+, B, C, etc.
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_attempts_user ON attempts(user_id);
+CREATE INDEX IF NOT EXISTS idx_attempts_kind ON attempts(kind);
+CREATE INDEX IF NOT EXISTS idx_attempts_created ON attempts(created_at);
 """
 
 # Sample data — barcha matnlar Python tomonidan kiritiladi (apostroflar xavfsiz)

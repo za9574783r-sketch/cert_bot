@@ -8,6 +8,31 @@ service; only the titles need to be precise and pedagogically correct.
 
 from typing import Dict, List, Tuple
 
+# Sub-topics per topic title. Used by AI to scope lesson generation and
+# by the webapp to show a detailed outline before the lesson is loaded.
+SUBTOPICS: Dict[str, List[str]] = {
+    # Ona tili
+    "Unlilar va undoshlar": ["Unlilar turlari", "Undoshlar tasnifi (sokin, jahriy, jarangli)",
+                              "Bo'g'in hosil bo'lishi", "Unlilar va undoshlar farqi"],
+    "So'z turlari": ["Ot", "Fe'l", "Sifat", "Ravish", "Son", "O'rnlik", "Bog'lovchi", "Yuklama", "Undov"],
+    "Gap tuzilishi": ["Ega va kesim", "Ikkkinchi darajali bo'laklar",
+                      "Gap tartibi (SOV)", "Gap turlari"],
+    # Tarix 5-sinf
+    "O'zbekiston tarixi: qadimgi davr": ["Ilk davlatlar", "Buyuk Ipak yo'li", "Amir Temur davri",
+                                         "Shayboniylar davri", "Me'morchilik yutuqlari"],
+    "Markaziy Osiyo ilk davlatlari": ["Baqtriya", "Sug'diyona", "Xorazm",
+                                       "Dehiston va Afrosiyob", "Hunlar va Kangarlar"],
+    "Buyuk Ipak yo'li": ["Ipak yo'lining paydo bo'lishi", "Ipak yo'li shaharlari",
+                          "Savdo va madaniy almashinuv", "Ipak yo'lining ta'siri"],
+    "Amir Temur va Temuriylar davlati": ["Amir Temur hayoti", "Temuriylar davlati",
+                                          "Sohibqiron yutuqlari", "Temur tuzuklari"],
+    # Adabiyot
+    "O'zbek xalq ertaklari": ["Sehrli ertaklar", "Hayotiy ertaklar",
+                               "Hayvonlar haqidagi ertaklar", "Ertaklarning xususiyatlari"],
+    "Alisher Navoiy hayoti va ijodi": ["Navoiy hayoti", "Xamsa", "Lison ut-Tayr",
+                                        "Muhakamat al-Lughatayn", "Devonlari"],
+}
+
 CURRICULUM: Dict[Tuple[str, int], List[str]] = {
     # ============================================================
     # ONA TILI (5-11 sinflar)
@@ -213,3 +238,13 @@ CURRICULUM: Dict[Tuple[str, int], List[str]] = {
 def get_titles(subject_name: str, grade_num: int) -> List[str]:
     """Return curated topic titles for a (subject, grade) pair, or empty list."""
     return list(CURRICULUM.get((subject_name, grade_num), []))
+
+
+def get_subtopics(topic_title: str) -> List[str]:
+    """Return sub-topics for a given topic title, or empty list."""
+    return list(SUBTOPICS.get(topic_title, []))
+
+
+def all_subjects() -> List[str]:
+    """Return distinct subject names in the curriculum."""
+    return sorted({s for s, _ in CURRICULUM.keys()})

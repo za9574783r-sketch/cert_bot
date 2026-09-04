@@ -176,6 +176,8 @@ async def quiz_list(request: web.Request) -> web.Response:
 
 async def quiz_submit(request: web.Request) -> web.Response:
     """POST /api/quiz/<topic_id>/submit — score a submission."""
+    from database import crud
+
     tid = int(request.match_info["topic_id"])
     try:
         body = await request.json()
@@ -207,14 +209,271 @@ async def quiz_submit(request: web.Request) -> web.Response:
             }
         )
     total = len(qs)
-    return _json(
-        {
-            "score": score,
-            "total": total,
-            "percentage": int((score / total) * 100) if total else 0,
-            "per_question": per,
+    result = {
+        "score": score,
+        "total": total,
+        "percentage": int((score / total) * 100) if total else 0,
+        "per_question": per,
+    }
+
+    # Persist for progress tracking
+    user = body.get("user") or {}
+    user_id = user.get("id")
+    if user_id:
+        try:
+            uid = int(user_id)
+            await crud.touch_user(uid, user.get("username", ""), user.get("full_name", ""))
+            await crud.record_attempt(
+                uid, "quiz", {"answers": answers_in, "topic_id": tid},
+                score=float(score), max_score=float(total), ref_id=tid,
+            )
+            await crud.update_user_aggregates(
+                uid, quizzes_taken=1, quizzes_correct=score,
+            )
+        except Exception as e:
+            print(f"quiz_submit persist error: {e}")
+
+    return _json(result)
+
+
+# ---------------------------------------------------------------------------
+# Essay endpoints — list topics, fetch a topic, grade a submission.
+# ---------------------------------------------------------------------------
+
+async def essay_topics(request: web.Request) -> web.Response:
+    """GET /api/essay/topics — return all essay prompts."""
+    from services import essay_service
+    return _json(essay_service.list_topics())
+
+
+async def essay_topic(request: web.Request) -> web.Response:
+    """GET /api/essay/topic/<id> — return one essay prompt."""
+    from services import essay_service
+    tid = int(request.match_info["id"])
+    topic = essay_service.get_topic(tid)
+    if not topic:
+        return _json({"error": "topic_not_found"}, 404)
+    return _json(topic)
+
+
+async def essay_grade(request: web.Request) -> web.Response:
+    """POST /api/essay/grade — grade a submitted essay against the rubric.
+
+    Body: {"topic_id": int, "text": str, "user": {id, username?, full_name?}|None}
+    """
+    from services import essay_service
+    from database import crud
+
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+
+    topic_id = body.get("topic_id")
+    text = (body.get("text") or "").strip()
+    user = body.get("user") or {}
+    if not topic_id or not text:
+        return _json({"error": "missing_fields"}, 400)
+
+    word_count = essay_service.count_words(text)
+    if word_count < 100:
+        result = {
+            "disqualification_reason": "Essening hajmi 100 ta so'zdan kam. (2 ball)",
+            "total_score": 2,
+            "max_score": 24,
+            "word_count": word_count,
         }
+        user_id = user.get("id")
+        if user_id:
+            try:
+                uid = int(user_id)
+                await crud.touch_user(uid, user.get("username", ""), user.get("full_name", ""))
+                await crud.record_attempt(
+                    uid, "essay", {"topic_id": int(topic_id), "word_count": word_count},
+                    score=2, max_score=24, level="Disqualification", ref_id=int(topic_id),
+                )
+                await crud.update_user_aggregates(uid, essays_graded=1, essays_total_score=2)
+            except Exception as e:
+                print(f"essay_grade persist (short) error: {e}")
+        return _json(result)
+
+    grade = await essay_service.grade_essay(int(topic_id), text)
+    if grade is None:
+        return _json(
+            {"error": "ai_unavailable",
+             "detail": "AI xizmati sozlanmagan. GEMINI_API_KEY yoki OPENROUTER_API_KEY ni .env ga qo'ying."},
+            503,
+        )
+    result = essay_service.grade_to_dict(grade)
+
+    user_id = user.get("id")
+    if user_id:
+        try:
+            uid = int(user_id)
+            await crud.touch_user(uid, user.get("username", ""), user.get("full_name", ""))
+            await crud.record_attempt(
+                uid, "essay",
+                {"topic_id": int(topic_id), "word_count": word_count, "text": text[:500]},
+                score=grade.total_score, max_score=grade.max_score,
+                level=grade.level, ref_id=int(topic_id),
+            )
+            await crud.update_user_aggregates(
+                uid, essays_graded=1, essays_total_score=grade.total_score,
+            )
+        except Exception as e:
+            print(f"essay_grade persist error: {e}")
+
+    return _json(result)
+
+
+# ---------------------------------------------------------------------------
+# Simulator endpoints — full 45-question, 180-minute exam.
+# ---------------------------------------------------------------------------
+
+async def exam_meta(request: web.Request) -> web.Response:
+    """GET /api/exam/meta — return exam structure (sections, durations, levels)."""
+    from services import simulator
+    return _json(simulator.get_exam_meta())
+
+
+async def exam_generate(request: web.Request) -> web.Response:
+    """GET /api/exam/generate?seed=... — build a fresh exam attempt."""
+    from services import simulator
+    seed = request.query.get("seed") or None
+    return _json(simulator.generate_exam(seed))
+
+
+async def exam_grade(request: web.Request) -> web.Response:
+    """POST /api/exam/grade — score a full exam attempt.
+
+    Body: {"questions": [...], "closed_answers": {qid: "A"|"B"|"C"|"D"},
+           "essay_topic_id": int|None, "essay_text": str|None,
+           "user": {id, username?, full_name?}|None}
+    """
+    from services import simulator
+    from database import crud
+
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+
+    questions = body.get("questions") or []
+    closed_answers = body.get("closed_answers") or {}
+    essay_topic_id = body.get("essay_topic_id")
+    essay_text = (body.get("essay_text") or "").strip() or None
+    user = body.get("user") or {}
+
+    # Coerce keys to int
+    closed_answers = {int(k): v for k, v in closed_answers.items()}
+
+    result = await simulator.grade_full_exam(
+        questions, closed_answers, essay_topic_id, essay_text
     )
+
+
+# ---------------------------------------------------------------------------
+# Progress endpoints — user stats, attempts history, leaderboard.
+# ---------------------------------------------------------------------------
+
+async def user_stats(request: web.Request) -> web.Response:
+    """GET /api/user/<id>/stats — accumulated counters for one user."""
+    from database import crud
+    uid = int(request.match_info["id"])
+    stats = await crud.get_user_stats(uid)
+    if not stats:
+        return _json({"error": "user_not_found"}, 404)
+
+    # Compute simple average essay %
+    essay_avg = 0.0
+    if stats["essays_graded"] > 0:
+        essay_avg = round((stats["essays_total_score"] / (stats["essays_graded"] * 24)) * 100, 1)
+    exam_avg = 0.0
+    if stats["exams_max_score"] > 0:
+        exam_avg = round((stats["exams_total_score"] / stats["exams_max_score"]) * 100, 1)
+    quiz_acc = 0.0
+    if stats["quizzes_taken"] > 0:
+        quiz_acc = round((stats["quizzes_correct"] / stats["quizzes_taken"]) * 100, 1)
+
+    return _json({
+        "user_id": stats["user_id"],
+        "full_name": stats.get("full_name", ""),
+        "username": stats.get("username", ""),
+        "first_seen_at": stats["first_seen_at"],
+        "last_active_at": stats["last_active_at"],
+        "quizzes": {
+            "taken": stats["quizzes_taken"],
+            "correct": stats["quizzes_correct"],
+            "accuracy_percent": quiz_acc,
+        },
+        "essays": {
+            "graded": stats["essays_graded"],
+            "average_percent": essay_avg,
+        },
+        "exams": {
+            "taken": stats["exams_taken"],
+            "average_percent": exam_avg,
+        },
+    })
+
+
+async def user_attempts(request: web.Request) -> web.Response:
+    """GET /api/user/<id>/attempts?kind=exam&limit=20 — recent attempts."""
+    from database import crud
+    uid = int(request.match_info["id"])
+    kind = request.query.get("kind")
+    limit = int(request.query.get("limit", "20"))
+    if kind and kind not in ("quiz", "essay", "exam"):
+        return _json({"error": "invalid_kind"}, 400)
+    rows = await crud.list_user_attempts(uid, limit)
+    if kind:
+        rows = [r for r in rows if r["kind"] == kind]
+    return _json(rows)
+
+
+async def leaderboard(request: web.Request) -> web.Response:
+    """GET /api/leaderboard?limit=10 — top users by average exam %."""
+    from database import crud
+    limit = int(request.query.get("limit", "10"))
+    rows = await crud.get_top_users(limit)
+    return _json([
+        {
+            "user_id": r["user_id"],
+            "full_name": r.get("full_name", "") or r.get("username", "") or f"User {r['user_id']}",
+            "exams_taken": r["exams_taken"],
+            "avg_percent": r["avg_pct"],
+        }
+        for r in rows
+    ])
+
+    # Persist for progress tracking
+    user_id = user.get("id")
+    if user_id:
+        try:
+            uid = int(user_id)
+            await crud.touch_user(uid, user.get("username", ""), user.get("full_name", ""))
+            level = result.get("level", {}).get("code", "")
+            payload = {
+                "closed_answers": closed_answers,
+                "essay_topic_id": essay_topic_id,
+                "essay_score": result.get("essay_score"),
+            }
+            await crud.record_attempt(
+                uid, "exam", payload,
+                score=float(result.get("total_earned", 0)),
+                max_score=float(result.get("total_max", 0)),
+                level=level,
+            )
+            await crud.update_user_aggregates(
+                uid,
+                exams_taken=1,
+                exams_total_score=float(result.get("total_earned", 0)),
+                exams_max_score=float(result.get("total_max", 0)),
+            )
+        except Exception as e:
+            print(f"exam_grade persist error: {e}")
+
+    return _json(result)
 
 
 async def healthcheck(request: web.Request) -> web.Response:

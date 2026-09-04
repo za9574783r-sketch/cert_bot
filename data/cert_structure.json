@@ -1,0 +1,38 @@
+{
+  "_comment": "O'zbekiston Milliy Sertifikat imtihoni haqiqiy formati. Manba: DTM 'Ona tili va adabiyot fanidan milliy test tizimi tafsiloti' 2023",
+  "subject": "Ona tili va adabiyot",
+  "total_questions": 45,
+  "duration_minutes": 180,
+  "total_score": 76.8,
+  "passing_score_percent": 50,
+  "sections": [
+    {"id": 1, "name": "Imlo qoidalari", "question_count": 2, "types": ["Y-1"], "points_per_question": 1.1},
+    {"id": 2, "name": "Lug'at boyligi", "question_count": 2, "types": ["Y-1"], "points_per_question": 1.1},
+    {"id": 3, "name": "Til birliklari uslubiyati", "question_count": 2, "types": ["Y-1"], "points_per_question": 1.1},
+    {"id": 4, "name": "Grammatika", "question_count": 6, "types": ["Y-1"], "points_per_question": 1.1},
+    {"id": 5, "name": "Punktuatsiya", "question_count": 3, "types": ["Y-1"], "points_per_question": 1.1},
+    {"id": 6, "name": "Adabiyot nazariyasi va tarixi", "question_count": 5, "types": ["Y-2", "O-1"], "points_per_question": 1.7},
+    {"id": 7, "name": "O'qish savodxonligi", "question_count": 8, "types": ["Y-2", "O-1"], "points_per_question": 1.7},
+    {"id": 8, "name": "Mavzular doirasida moslashtirish", "question_count": 3, "types": ["O-1"], "points_per_question": 2.5},
+    {"id": 9, "name": "Lingvistik va badiiy tahlil", "question_count": 9, "types": ["O-1"], "points_per_question": 2.5},
+    {"id": 10, "name": "Yozma savodxonlik (esse)", "question_count": 1, "types": ["O-2"], "points_per_question": 24.0}
+  ],
+  "question_types": {
+    "Y-1": "Bitta to'g'ri javobli yopiq test",
+    "Y-2": "Moslashtirishni talab qiladigan yopiq test",
+    "O-1": "Qisqa javobli ochiq test (a, b bandlar)",
+    "O-2": "Kengaytirilgan javobli ochiq test (esse)"
+  },
+  "passing_levels": {
+    "A_plus": {"min_percent": 86, "label": "A+ (A'lo, sertifikat)",
+                "comment": "Oliy o'quv yurtiga kirish uchun tavsiya etiladi"},
+    "A": {"min_percent": 71, "label": "A (A'lo)",
+          "comment": "Oliy o'quv yurtiga kirish uchun tavsiya etiladi"},
+    "B_plus": {"min_percent": 56, "label": "B+ (Yaxshi)",
+               "comment": "Oliy o'quv yurtiga kirish huquqi"},
+    "B": {"min_percent": 41, "label": "B (Qoniqarli)",
+          "comment": "O'rta maxsus o'quv yurtiga kirish huquqi"},
+    "C": {"min_percent": 0, "label": "C (Qoniqarsiz)",
+          "comment": "Sertifikat berilmaydi"}
+  }
+}
