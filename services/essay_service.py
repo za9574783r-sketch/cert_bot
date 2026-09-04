@@ -158,65 +158,27 @@ MUHIM:
 
 
 async def _call_gemini(prompt: str) -> Optional[str]:
-    payload = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.3, "maxOutputTokens": 2048},
-    }
-    try:
-        async with aiohttp.ClientSession() as session:
-            url = f"{GEMINI_URL}?key={GEMINI_API_KEY}"
-            async with session.post(
-                url, json=payload, timeout=aiohttp.ClientTimeout(total=90)
-            ) as resp:
-                if resp.status != 200:
-                    err = await resp.text()
-                    print(f"Gemini error: {resp.status} - {err[:200]}")
-                    return None
-                data = await resp.json()
-                candidates = data.get("candidates", [])
-                if not candidates:
-                    return None
-                parts = candidates[0].get("content", {}).get("parts", [])
-                text = "".join(p.get("text", "") for p in parts)
-                return text.strip() if text else None
-    except asyncio.TimeoutError:
-        print("Gemini timeout")
-        return None
-    except Exception as e:
-        print(f"Gemini exception: {e}")
-        return None
+    """Deprecated: kept as a thin shim for backwards compat. Delegates
+    to ``ai_service._call_llm`` which handles the full provider chain.
+    """
+    from services.ai_service import _call_llm
+    return await _call_llm(
+        "Sen O'zbekiston Milliy Sertifikat ekspertisiz. Javobingizni faqat JSON formatida bering.",
+        prompt,
+        json_mode=True,
+    )
 
 
 async def _call_openrouter(prompt: str) -> Optional[str]:
-    payload = {
-        "model": OPENROUTER_MODEL,
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.3,
-        "max_tokens": 2048,
-    }
-    headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://t.me/cert_bot",
-        "X-Title": "Milliy Sertifikat Bot",
-    }
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.post(
-                OPENROUTER_URL,
-                json=payload,
-                headers=headers,
-                timeout=aiohttp.ClientTimeout(total=90),
-            ) as resp:
-                if resp.status != 200:
-                    err = await resp.text()
-                    print(f"OpenRouter error: {resp.status} - {err[:200]}")
-                    return None
-                data = await resp.json()
-                return data.get("choices", [{}])[0].get("message", {}).get("content", "").strip() or None
-    except Exception as e:
-        print(f"OpenRouter exception: {e}")
-        return None
+    """Deprecated: kept as a thin shim for backwards compat. Delegates
+    to ``ai_service._call_llm`` which handles the full provider chain.
+    """
+    from services.ai_service import _call_llm
+    return await _call_llm(
+        "Sen O'zbekiston Milliy Sertifikat ekspertisiz. Javobingizni faqat JSON formatida bering.",
+        prompt,
+        json_mode=True,
+    )
 
 
 def _strip_code_fence(text: str) -> str:
@@ -271,7 +233,15 @@ async def grade_essay(topic_id: int, essay_text: str) -> Optional[EssayGrade]:
 
     prompt = _build_grading_prompt(essay_text, topic, rubric)
 
-    raw = await (_call_gemini(prompt) if provider == "gemini" else _call_openrouter(prompt))
+    # Delegate to ai_service for the cascading Gemini → OpenRouter chain.
+    # The prompt is already assembled (system + user combined), so pass
+    # through as a single user message with json_mode for stricter output.
+    from services.ai_service import _call_llm
+    raw = await _call_llm(
+        "Sen O'zbekiston Milliy Sertifikat ekspertisiz. Javobingizni faqat JSON formatida bering.",
+        prompt,
+        json_mode=True,
+    )
     if not raw:
         return None
 

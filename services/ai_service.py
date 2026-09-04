@@ -1,14 +1,17 @@
 """AI Service for generating lessons and quizzes.
 
-Provider priority:
+Provider priority (cascading fallback):
 1. ``GEMINI_API_KEY`` (Google Gemini 2.0 Flash) — preferred, fast, free tier
-2. ``OPENROUTER_API_KEY`` (OpenRouter free models) — fallback
+2. OpenRouter ``minimax/minimax-m3:free`` — secondary fallback (when
+   configured by setting ``OPENROUTER_MODEL_PRIMARY`` or by default)
+3. OpenRouter ``meta-llama/llama-3.1-8b-instruct:free`` — last-resort fallback
 
-Both providers expose the same payload shape: a single system + user
+All providers expose the same payload shape: a single system + user
 prompt, returning plain text. OpenRouter may wrap it in markdown code
 fences, so we strip those before parsing.
 """
 import json
+import os
 import aiohttp
 import asyncio
 from typing import Dict, List, Optional
@@ -23,7 +26,35 @@ from database.crud import (
 )
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-OPENROUTER_MODEL = "meta-llama/llama-3.1-8b-instruct:free"
+
+# Provider chain — tried in order, first success wins. Override with env
+# vars like ``OPENROUTER_MODELS="model1:free,model2:free"`` if you want
+# a different set. All listed models are free-tier on OpenRouter as of
+# the project's initial publish.
+DEFAULT_OPENROUTER_MODELS = [
+    "minimax/minimax-m3:free",
+    "google/gemma-4-31b-it:free",
+    "meta-llama/llama-3.1-8b-instruct:free",
+]
+
+
+def _openrouter_models() -> List[str]:
+    """Return the list of OpenRouter models to try, in order.
+
+    Reads from the ``OPENROUTER_MODELS`` env var (comma-separated) when
+    present, otherwise returns the default chain. Lets users add/remove
+    models without touching code.
+    """
+    raw = os.getenv("OPENROUTER_MODELS", "").strip()
+    if raw:
+        return [m.strip() for m in raw.split(",") if m.strip()]
+    return list(DEFAULT_OPENROUTER_MODELS)
+
+
+# Backward-compat shims for any code that still references these names.
+OPENROUTER_MODEL_PRIMARY = _openrouter_models()[0]
+OPENROUTER_MODEL_FALLBACK = _openrouter_models()[-1]
+
 GEMINI_URL = (
     "https://generativelanguage.googleapis.com/v1beta/models/"
     "gemini-2.0-flash:generateContent"
@@ -76,6 +107,11 @@ Javob faqat JSON bo'lsin, hech qanday qo'shimcha matnsiz."""
 
 
 def _provider() -> str:
+    """Return the name of the active LLM provider.
+
+    Order: Gemini → OpenRouter primary → OpenRouter fallback. Returns
+    "none" when no key is configured.
+    """
     if GEMINI_API_KEY and GEMINI_API_KEY != "your_gemini_api_key_here":
         return "gemini"
     if OPENROUTER_API_KEY and OPENROUTER_API_KEY != "your_openrouter_api_key_here":
@@ -163,21 +199,49 @@ async def _call_openrouter(payload: dict) -> Optional[str]:
 
 
 async def _call_llm(system_prompt: str, user_prompt: str, *, json_mode: bool = False) -> Optional[str]:
-    """Provider-agnostic LLM call. Returns raw text or None."""
-    provider = _provider()
-    if provider == "gemini":
-        return await _call_gemini(system_prompt, user_prompt)
-    if provider == "openrouter":
+    """Provider-agnostic LLM call with cascading fallbacks.
+
+    Tries, in order:
+    1. Gemini (if GEMINI_API_KEY is set)
+    2. Each OpenRouter model in :func:`_openrouter_models` — first non-empty
+       response wins. This lets the bot keep working when one free model
+       rate-limits or is down; the next model in the chain takes over.
+    """
+    if GEMINI_API_KEY and GEMINI_API_KEY != "your_gemini_api_key_here":
+        out = await _call_gemini(system_prompt, user_prompt)
+        if out:
+            return out
+        # Gemini returned nothing (rate-limit / outage) — fall through to
+        # OpenRouter chain instead of giving up immediately.
+        print("Gemini returned no content, falling back to OpenRouter chain")
+
+    if not (OPENROUTER_API_KEY and OPENROUTER_API_KEY != "your_openrouter_api_key_here"):
+        return None
+
+    temperature = 0.5 if json_mode else 0.7
+    max_tokens = 2000 if json_mode else 3000
+    last_err: Optional[str] = None
+    for model in _openrouter_models():
         payload = {
-            "model": OPENROUTER_MODEL,
+            "model": model,
             "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
-            "temperature": 0.5 if json_mode else 0.7,
-            "max_tokens": 2000 if json_mode else 3000,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
         }
-        return await _call_openrouter(payload)
+        try:
+            out = await _call_openrouter(payload)
+        except Exception as e:  # defensive — _call_openrouter already swallows
+            out = None
+            last_err = repr(e)
+        if out:
+            if model != _openrouter_models()[0]:
+                print(f"OpenRouter fallback succeeded with model={model}")
+            return out
+        print(f"OpenRouter model {model} returned no content")
+    print(f"All OpenRouter models exhausted. last_err={last_err}")
     return None
 
 
